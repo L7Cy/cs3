@@ -13,16 +13,16 @@ void loop()
 {
   int v;
   v = digitalRead(SWITCH); // 入力を読み取る
-  if (v == HIGH)
-  { // タクトスイッチが押されたとき
-    if (down <= 1)
+  if (v == HIGH)           // タクトスイッチが押されたとき
+  {
+    if (down <= 1000)
       down++;
   }
   else
   {
-    down = 0;
+    down = 0;//チャタリングが発生している間はカウントがリセットされる
   }
-  if (down == 1)
+  if (down == 1000)
   {
     state = 1 - state;
   }
