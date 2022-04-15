@@ -1,7 +1,7 @@
 const int SWITCH = 2; // タクトスイッチが接続されているピン
 const int LED = 9;    // LED が接続されているピン
 int state = 0;        // 現在の状態(0 または 1)
-int count = 0;
+int down = 0;
 
 void setup()
 {
@@ -14,14 +14,17 @@ void loop()
   int v;
   v = digitalRead(SWITCH); // 入力を読み取る
   if (v == HIGH)
-  {                    // タクトスイッチが押されたとき
-    if(count<=100)
-      count++; 
-  }else{
-    count=0;
+  { // タクトスイッチが押されたとき
+    if (down <= 1)
+      down++;
   }
-  if(count==100){
-    state = 1 -state;
+  else
+  {
+    down = 0;
+  }
+  if (down == 1)
+  {
+    state = 1 - state;
   }
   if (state == 1)
   {                          // 状態が 1 のとき
