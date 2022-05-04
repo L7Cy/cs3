@@ -10,11 +10,14 @@ void setup()
 void loop()
 {
   int v;
-  v = analogRead(SENSOR);  // センサの出力値を読み取る
-  Serial.println(v);       // シリアル通信で値を送信
-  if(v<200){
+  v = analogRead(SENSOR); // センサの出力値を読み取る
+  Serial.println(v);      // シリアル通信で値を送信
+  if (v < 200)
+  {
     digitalWrite(LED, HIGH); // LED を点灯
-  }else{
+  }
+  else
+  {
     digitalWrite(LED, LOW); // LED を消灯
   }
 }

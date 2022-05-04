@@ -1,7 +1,7 @@
 const int SENSOR = 0; // 光センサが接続されているピン(アナログ)
 const int LED = 9;    // LED が接続されているピン
-float rc =0;
-int v=0;
+float rc = 0;
+int v = 0;
 #define a 0.8
 
 void setup()
