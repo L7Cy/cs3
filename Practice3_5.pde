@@ -3,8 +3,8 @@ Serial port; // シリアルポート
 
 void setup() {
   size(256, 256); // 256×256 ピクセルのウィンドウを作成
-  port.clear(); // シリアルポートのクリア
   port = new Serial(this, "COM3", 9600); // シリアルポート初期化
+  port.clear(); // シリアルポートのクリア
 }
 
 void draw() {
