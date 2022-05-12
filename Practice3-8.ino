@@ -6,7 +6,11 @@ void setup()
 {
   pinMode(SWITCH, INPUT);            // ピンを入力に設定
   pinMode(LED, OUTPUT);              // ピンを出力に設定
-  attachInterrupt(0, reset, RISING); // 割り込みの設定
+  attachInterrupt(0, reset, FALLING); // 割り込みの設定
+  //LOW:押されていない時にリセット
+  //CHANGE:押された＆離されたときにリセット
+  //RISING:押された時にリセット
+  //FALLING:離されたときにリセット
 }
 
 void loop()
