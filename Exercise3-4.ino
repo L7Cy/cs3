@@ -1,5 +1,4 @@
 const int VARIABLE_RESISTOR1 = 0; // 可変抵抗 1 が接続されているピン(アナログ)
-const int VARIABLE_RESISTOR2 = 1; // 可変抵抗 2 が接続されているピン(アナログ)
 
 void setup()
 {
