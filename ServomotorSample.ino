@@ -1,3 +1,4 @@
+//サーボモータ
 #include <Servo.h>       // サーボモータ関連ファイルのインクルード
 const int SERVO = 9; // サーボモータが接続されているピン
 Servo servo;         // サーボモータ

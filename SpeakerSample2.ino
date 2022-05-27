@@ -1,3 +1,4 @@
+//スピーカ
 const int SPEAKER = 9; // スピーカが接続されているピン
 
 void setup()

@@ -1,3 +1,4 @@
+//照度センサ
 const int SENSOR = 0; // 光センサが接続されているピン(アナログ)
 const int LED = 9;  // LED が接続されているピン
 

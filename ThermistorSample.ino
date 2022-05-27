@@ -1,3 +1,4 @@
+//温度センサ
 const int THERMISTOR = 0; // 温度センサが接続されているピン(アナログ)
 
 void setup()
