@@ -102,7 +102,7 @@ void loop()
     laststarttime = millis(); // start-now
   }
 
-  if ((millis() - laststarttime) > nbtime)//状態を同期させる
+  if ((millis() - laststarttime) > nbtime)//状態を同期させる,delay(nbtime)じゃだめなの？
   {
     if (realstate != filteredstate) //同じじゃなきゃ同じにする
     {
