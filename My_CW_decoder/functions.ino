@@ -1,5 +1,6 @@
-void docode()
+void decode_obun()
 {
+  //A to Z
   if (strcmp(code, ".-") == 0)
     printascii(65);
   if (strcmp(code, "-...") == 0)
@@ -53,6 +54,9 @@ void docode()
   if (strcmp(code, "--..") == 0)
     printascii(90);
 
+//0 to 9
+  if (strcmp(code, "-----") == 0)
+    printascii(48);
   if (strcmp(code, ".----") == 0)
     printascii(49);
   if (strcmp(code, "..---") == 0)
@@ -71,63 +75,44 @@ void docode()
     printascii(56);
   if (strcmp(code, "----.") == 0)
     printascii(57);
-  if (strcmp(code, "-----") == 0)
-    printascii(48);
 
-  if (strcmp(code, "..--..") == 0)
+  if (strcmp(code, "..--..") == 0) //"?"
     printascii(63);
-  if (strcmp(code, ".-.-.-") == 0)
+  if (strcmp(code, ".-.-.-") == 0) //"."
     printascii(46);
-  if (strcmp(code, "--..--") == 0)
+  if (strcmp(code, "--..--") == 0) //","
     printascii(44);
-  if (strcmp(code, "-.-.--") == 0)
+  if (strcmp(code, "-.-.--") == 0)//'!'
     printascii(33);
-  if (strcmp(code, ".--.-.") == 0)
+  if (strcmp(code, ".--.-.") == 0) //"@"
     printascii(64);
-  if (strcmp(code, "---...") == 0)
+  if (strcmp(code, "---...") == 0)//':'
     printascii(58);
-  if (strcmp(code, "-....-") == 0)
+  if (strcmp(code, "-....-") == 0)//'-'
     printascii(45);
-  if (strcmp(code, "-..-.") == 0)
+  if (strcmp(code, "-..-.") == 0) //"/"
     printascii(47);
 
-  if (strcmp(code, "-.--.") == 0)
+  if (strcmp(code, "-.--.") == 0) //"("
     printascii(40);
-  if (strcmp(code, "-.--.-") == 0)
+  if (strcmp(code, "-.--.-") == 0) //")"
     printascii(41);
-  if (strcmp(code, ".-...") == 0)
+  if (strcmp(code, ".-...") == 0)//'_'
     printascii(95);
-  if (strcmp(code, "...-..-") == 0)
+  if (strcmp(code, "...-..-") == 0)//'$'
     printascii(36);
-  if (strcmp(code, "...-.-") == 0)
+  if (strcmp(code, "...-.-") == 0) //">"
     printascii(62);
-  if (strcmp(code, ".-.-.") == 0)
+  if (strcmp(code, ".-.-.") == 0) //"<"
     printascii(60);
-  if (strcmp(code, "...-.") == 0)
+  if (strcmp(code, "...-.") == 0)//'~'
     printascii(126);
 }
 
+
 void printascii(int asciinumber)
 {
-
-  int fail = 0;
-
-  if (lcdindex > colums - 1) //端までいったら
-  {
-    lcdindex = 0;
-
-    for (int i = 0; i <= colums - 1; i++)
-    {
-      lcd.setCursor(i + fail, rows - 2);
-      lcd.write(line1[i]);
-      lcd.setCursor(i + fail, rows - 1);
-      lcd.write(32);
-    }
-  }
-  line1[lcdindex] = asciinumber;
-  lcd.setCursor(lcdindex + fail, rows - 1);
-  lcd.write(asciinumber);
-  lcdindex += 1;
+  Serial.write(asciinumber);
 }
 
 void updateinfolinelcd()
@@ -151,3 +136,26 @@ void updateinfolinelcd()
     lcd.print(" WPM ");
   }
 }
+
+// void printascii(int asciinumber)
+// {
+
+//   int fail = 0;
+
+//   if (lcdindex > colums - 1) //端までいったら
+//   {
+//     lcdindex = 0;
+
+//     for (int i = 0; i <= colums - 1; i++)
+//     {
+//       lcd.setCursor(i + fail, rows - 2);
+//       lcd.write(line1[i]);
+//       lcd.setCursor(i + fail, rows - 1);
+//       lcd.write(32);
+//     }
+//   }
+//   line1[lcdindex] = asciinumber;
+//   lcd.setCursor(lcdindex + fail, rows - 1);
+//   lcd.write(asciinumber);
+//   lcdindex += 1;
+// }

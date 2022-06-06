@@ -9,7 +9,7 @@ int lcdindex = 0;
 int line1[colums];
 int line2[colums];
 
-int audioInPin = A1;
+int audioInPin = 0;
 int audioOutPin = 10;
 int ledPin = 13;
 
@@ -89,10 +89,11 @@ void loop()
     magnitudelimit = (magnitudelimit + ((magnitude - magnitudelimit) / 6)); /// moving average filter
   }
 
-  if (magnitudelimit < magnitudelimit_low) // magnitudelimit_lowは常にmagnitudelimitよりも小さい
+  if (magnitudelimit < magnitudelimit_low) // magnitudelimit_lowは常にmagnitudelimitよりも小さくする
     magnitudelimit = magnitudelimit_low;
 
-  if (magnitude > magnitudelimit * 0.6) // just to have some space up
+  if (magnitude > magnitudelimit * 0.6)//信号があるかないかの判別
+  // just to have some space up
     realstate = HIGH;
   else
     realstate = LOW;
@@ -102,7 +103,7 @@ void loop()
     laststarttime = millis(); // start-now
   }
 
-  if ((millis() - laststarttime) > nbtime)//状態を同期させる,delay(nbtime)じゃだめなの？
+  if ((millis() - laststarttime) > nbtime) //状態を同期させる,delay(nbtime)じゃだめなの？
   {
     if (realstate != filteredstate) //同じじゃなきゃ同じにする
     {
@@ -122,7 +123,7 @@ void loop()
     {
       startttimelow = millis();
       highduration = (millis() - starttimehigh);
-      if (highduration < (2 * hightimesavg) || hightimesavg == 0)
+      if (highduration < (2 * hightimesavg) || hightimesavg == 0)//hightimesavgの調整
       {
         hightimesavg = (highduration + hightimesavg + hightimesavg) / 3; // now we know avg dit time ( rolling 3 avg)
       }
@@ -133,20 +134,20 @@ void loop()
     }
   }
 
-  if (filteredstate != filteredstatebefore) //変化したら
+  if (filteredstate != filteredstatebefore)
   {
     stop = LOW;
-    if (filteredstate == LOW)
+    if (filteredstate == LOW) //長点と短点の判別
     {
       if (highduration < (hightimesavg * 2) && highduration > (hightimesavg * 0.6))
       { /// 0.6 filter out false dits
         strcat(code, ".");
-        Serial.print(".");
+        // Serial.print(".");
       }
       if (highduration > (hightimesavg * 2) && highduration < (hightimesavg * 6))
       {
         strcat(code, "-");
-        Serial.print("-");
+        // Serial.print("-");
         wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
     }
@@ -161,41 +162,41 @@ void loop()
       if (wpm > 35)
         lacktime = 1.5;
 
-      if (lowduration > (hightimesavg * (2 * lacktime)) && lowduration < hightimesavg * (5 * lacktime))
-      { // letter space
-        docode();
+      if (lowduration > (hightimesavg * (2 * lacktime)) && lowduration < hightimesavg * (5 * lacktime)) // letter space
+      {
+        decode_obun();
         code[0] = '\0';
-        Serial.print("/");
+        // Serial.print("/");
       }
-      if (lowduration >= hightimesavg * (5 * lacktime))
-      { // word space
-        docode();
+      if (lowduration >= hightimesavg * (5 * lacktime)) // word space
+      {
+        decode_obun();
         code[0] = '\0';
         printascii(32);
-        Serial.println();
+        // Serial.println();
       }
     }
   }
 
-  if ((millis() - startttimelow) > (highduration * 6) && stop == LOW)
+  if ((millis() - startttimelow) > (highduration * 6) && stop == LOW)//信号がなければストップ
   {
-    docode();
+    decode_obun();
     code[0] = '\0';
     stop = HIGH;
   }
 
-  if (filteredstate == HIGH)
-  {
-    digitalWrite(ledPin, HIGH);
-    tone(audioOutPin, target_freq);
-  }
-  else
-  {
-    digitalWrite(ledPin, LOW);
-    noTone(audioOutPin);
-  }
+  // if (filteredstate == HIGH)
+  // {
+  //   digitalWrite(ledPin, HIGH);
+  //   tone(audioOutPin, target_freq);
+  // }
+  // else
+  // {
+  //   digitalWrite(ledPin, LOW);
+  //   noTone(audioOutPin);
+  // }
 
-  updateinfolinelcd();
+  // updateinfolinelcd();
   realstatebefore = realstate;
   lasthighduration = highduration;
   filteredstatebefore = filteredstate;
