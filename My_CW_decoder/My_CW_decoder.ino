@@ -154,21 +154,13 @@ void loop()
 
     if (filteredstate == HIGH)
     {
-      float lacktime = 1;
-      if (wpm > 25)
-        lacktime = 1.0; ///  when high speeds we have to have a little more pause before new letter or new word
-      if (wpm > 30)
-        lacktime = 1.2;
-      if (wpm > 35)
-        lacktime = 1.5;
-
-      if (lowduration > (hightimesavg * (2 * lacktime)) && lowduration < hightimesavg * (5 * lacktime)) // letter space
+      if (lowduration > (hightimesavg * 2) && lowduration < hightimesavg * 5) // letter space
       {
         decode_obun();
         code[0] = '\0';
         // Serial.print("/");
       }
-      if (lowduration >= hightimesavg * (5 * lacktime)) // word space
+      if (lowduration >= hightimesavg * 5) // word space
       {
         decode_obun();
         code[0] = '\0';
