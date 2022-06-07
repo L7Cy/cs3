@@ -36,7 +36,7 @@ int nbtime = 6;
 long starttimehigh;
 long highduration;
 long lasthighduration;
-long hightimesavg;
+long highdurationavg;
 long lowtimesavg;
 long startttimelow;
 long lowduration;
@@ -113,59 +113,52 @@ void loop()
 
   if (filteredstate != filteredstatebefore) //変化したら時間を記録
   {
+    stop = LOW;
+
     if (filteredstate == HIGH)
     {
       starttimehigh = millis();
       lowduration = (millis() - startttimelow);
+
+      if (lowduration > (highdurationavg * 2) && lowduration < highdurationavg * 5) // letter space
+      {
+        decode_obun();
+        code[0] = '\0';
+        // Serial.print("/");
+      }
+      if (lowduration >= highdurationavg * 5) // word space
+      {
+        decode_obun();
+        code[0] = '\0';
+        printascii(32);
+        // Serial.println();
+      }
     }
 
     if (filteredstate == LOW)
     {
       startttimelow = millis();
       highduration = (millis() - starttimehigh);
-      if (highduration < (2 * hightimesavg) || hightimesavg == 0)//hightimesavgの調整
-      {
-        hightimesavg = (highduration + hightimesavg + hightimesavg) / 3; // now we know avg dit time ( rolling 3 avg)
-      }
-      if (highduration > (5 * hightimesavg))
-      {
-        hightimesavg = highduration + hightimesavg; // if speed decrease fast ..
-      }
-    }
-  }
 
-  if (filteredstate != filteredstatebefore)
-  {
-    stop = LOW;
-    if (filteredstate == LOW) //長点と短点の判別
-    {
-      if (highduration < (hightimesavg * 2) && highduration > (hightimesavg * 0.6))
+      if (highduration < (2 * highdurationavg) || highdurationavg == 0)//hightimesavgの調整
+      {
+        highdurationavg = (highduration + highdurationavg + highdurationavg) / 3; // now we know avg dit time ( rolling 3 avg)
+      }
+      if (highduration > (5 * highdurationavg))
+      {
+        highdurationavg = highduration + highdurationavg; // if speed decrease fast ..
+      }
+
+      if (highduration < (highdurationavg * 2) && highduration > (highdurationavg * 0.6))
       { /// 0.6 filter out false dits
         strcat(code, ".");
         // Serial.print(".");
       }
-      if (highduration > (hightimesavg * 2) && highduration < (hightimesavg * 6))
+      if (highduration > (highdurationavg * 2) && highduration < (highdurationavg * 6))
       {
         strcat(code, "-");
         // Serial.print("-");
-        wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
-      }
-    }
-
-    if (filteredstate == HIGH)
-    {
-      if (lowduration > (hightimesavg * 2) && lowduration < hightimesavg * 5) // letter space
-      {
-        decode_obun();
-        code[0] = '\0';
-        // Serial.print("/");
-      }
-      if (lowduration >= hightimesavg * 5) // word space
-      {
-        decode_obun();
-        code[0] = '\0';
-        printascii(32);
-        // Serial.println();
+        // wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
     }
   }
