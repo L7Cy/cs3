@@ -52,7 +52,6 @@ int nbtime = 6; /// ms noise blanker
 
 long starttimehigh;
 long highduration;
-long lasthighduration;
 long highdurationsavg;
 long lowtimesavg;
 long startttimelow;
