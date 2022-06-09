@@ -15,7 +15,7 @@ int ledPin = 13;
 
 float magnitude;
 int magnitudelimit = 100;
-int magnitudelimit_low = 100;
+int magnitudelimit_low = 100;//固定
 int realstate = LOW;
 int realstatebefore = LOW;
 int filteredstate = LOW;
