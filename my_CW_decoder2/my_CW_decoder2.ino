@@ -161,7 +161,7 @@ void loop()
       float lacktime = 1;
       // checklacktime();
 
-      if (lowduration > (highdurationsvg * (2 * lacktime)) && lowduration < highdurationsvg * (5 * lacktime))
+      if (lowduration > (highdurationsvg * (2 * lacktime)) && lowduration < highdurationsvg * (5 * lacktime))//highdurationsavg*2以上を条件にしたほうがいい
       { // print letter
         docode();
         code[0] = '\0';

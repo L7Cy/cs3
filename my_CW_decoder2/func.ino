@@ -25,7 +25,7 @@ void calcavg()
   }
 }
 
-void docode()
+void docode()//初期化と一緒にする？
 {
   if (strcmp(code, ".-") == 0)
     printascii(65);
@@ -139,15 +139,6 @@ void docode()
   }
   if (strcmp(code, "...-.") == 0)
     printascii(126);
-  //////////////////
-  // The specials //
-  //////////////////
-  // if (strcmp(code, ".-.-") == 0)
-  //   printascii(3);
-  // if (strcmp(code, "---.") == 0)
-  //   printascii(4);
-  // if (strcmp(code, ".--.-") == 0)
-  //   printascii(6);
 
   if (strcmp(code, "........") == 0) // HH
   {
@@ -162,6 +153,15 @@ void docode()
     Serial.println(wpm);
     count = 0;
   }
+  //////////////////
+  // The specials //
+  //////////////////
+  // if (strcmp(code, ".-.-") == 0)
+  //   printascii(3);
+  // if (strcmp(code, "---.") == 0)
+  //   printascii(4);
+  // if (strcmp(code, ".--.-") == 0)
+  //   printascii(6);
 }
 
 void updateinfolinelcd()
