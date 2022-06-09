@@ -98,10 +98,9 @@ void loop()
   if (magnitude > magnitudelimit_low)
   {
     magnitudelimit = (magnitudelimit + ((magnitude - magnitudelimit) / 6)); /// moving average filter
+    if (magnitudelimit < magnitudelimit_low)                                // magnitudelimit_lowは常にmagnitudelimitよりも小さい
+      magnitudelimit = magnitudelimit_low;
   }
-
-  if (magnitudelimit < magnitudelimit_low) // magnitudelimit_lowは常にmagnitudelimitよりも小さい
-    magnitudelimit = magnitudelimit_low;
 
   if (magnitude > magnitudelimit * 0.6)
     realstate = HIGH;
