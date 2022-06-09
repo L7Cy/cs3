@@ -156,35 +156,6 @@ void docode()//初期化と一緒にする？
   code[0] = '\0';
 }
 
-void updateinfolinelcd()
-{
-  int place;
-  if (rows == 4)
-  {
-    place = colums / 2;
-  }
-  else
-  {
-    place = 2;
-  }
-  if (wpm < 10)
-  {
-    lcd.setCursor((place)-2, 0);
-    lcd.print("0");
-    lcd.setCursor((place)-1, 0);
-    lcd.print(wpm);
-    lcd.setCursor((place), 0);
-    lcd.print(" WPM");
-  }
-  else
-  {
-    lcd.setCursor((place)-2, 0);
-    lcd.print(wpm);
-    lcd.setCursor((place), 0);
-    lcd.print(" WPM ");
-  }
-}
-
 void printascii(int asciinumber)
 {
   Serial.write(asciinumber);
@@ -227,4 +198,33 @@ void printascii(int asciinumber)
 //     lacktime = 1.2;
 //   if (wpm > 35)
 //     lacktime = 1.5;
+// }
+
+// void updateinfolinelcd()
+// {
+//   int place;
+//   if (rows == 4)
+//   {
+//     place = colums / 2;
+//   }
+//   else
+//   {
+//     place = 2;
+//   }
+//   if (wpm < 10)
+//   {
+//     lcd.setCursor((place)-2, 0);
+//     lcd.print("0");
+//     lcd.setCursor((place)-1, 0);
+//     lcd.print(wpm);
+//     lcd.setCursor((place), 0);
+//     lcd.print(" WPM");
+//   }
+//   else
+//   {
+//     lcd.setCursor((place)-2, 0);
+//     lcd.print(wpm);
+//     lcd.setCursor((place), 0);
+//     lcd.print(" WPM ");
+//   }
 // }
