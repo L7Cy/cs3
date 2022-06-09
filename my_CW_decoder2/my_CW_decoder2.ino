@@ -152,11 +152,11 @@ void loop()
       highduration = (millis() - starttimehigh);
       calcavg();
 
-      if ((highdurationsvg * 0.6) < highduration && highduration < (highdurationsvg * 2)) // highdurationがピッタリ2だったら？
+      if ((highdurationsvg * 0.6) < highduration && highduration < (highdurationsvg * 2))
       {                                                                                   /// 0.6 filter out false dits
         strcat(code, ".");
       }
-      if ((highdurationsvg * 2) < highduration && highduration < (highdurationsvg * 6))
+      if ((highdurationsvg * 2) <= highduration && highduration < (highdurationsvg * 6))
       {
         strcat(code, "-");
         wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
