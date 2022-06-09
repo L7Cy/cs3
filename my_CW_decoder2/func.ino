@@ -154,15 +154,6 @@ void docode()//初期化と一緒にする？
     count = 0;
   }
   code[0] = '\0';
-  //////////////////
-  // The specials //
-  //////////////////
-  // if (strcmp(code, ".-.-") == 0)
-  //   printascii(3);
-  // if (strcmp(code, "---.") == 0)
-  //   printascii(4);
-  // if (strcmp(code, ".--.-") == 0)
-  //   printascii(6);
 }
 
 void updateinfolinelcd()
@@ -227,30 +218,6 @@ void printascii(int asciinumber)
   // lcd.write(asciinumber);
   // lcdindex += 1;
 }
-
-void setspecials()
-{
-  byte U_umlaut[8] = {B01010, B00000, B10001, B10001, B10001, B10001, B01110, B00000};   // 'Ü'
-  byte O_umlaut[8] = {B01010, B00000, B01110, B10001, B10001, B10001, B01110, B00000};   // 'Ö'
-  byte A_umlaut[8] = {B01010, B00000, B01110, B10001, B11111, B10001, B10001, B00000};   // 'Ä'
-  byte AE_capital[8] = {B01111, B10100, B10100, B11110, B10100, B10100, B10111, B00000}; // 'Æ'
-  byte OE_capital[8] = {B00001, B01110, B10011, B10101, B11001, B01110, B10000, B00000}; // 'Ø'
-  byte fullblock[8] = {B11111, B11111, B11111, B11111, B11111, B11111, B11111, B11111};
-  byte AA_capital[8] = {B00100, B00000, B01110, B10001, B11111, B10001, B10001, B00000}; // 'Å'
-  byte emtyblock[8] = {B00000, B00000, B00000, B00000, B00000, B00000, B00000, B00000};
-}
-
-// void createchars()
-// {
-//   lcd.createChar(0, U_umlaut);   //     German
-//   lcd.createChar(1, O_umlaut);   //     German, Swedish
-//   lcd.createChar(2, A_umlaut);   //     German, Swedish
-//   lcd.createChar(3, AE_capital); //   Danish, Norwegian
-//   lcd.createChar(4, OE_capital); //   Danish, Norwegian
-//   lcd.createChar(5, fullblock);
-//   lcd.createChar(6, AA_capital); //   Danish, Norwegian, Swedish
-//   lcd.createChar(7, emtyblock);
-// }
 
 // void checklacktime()
 // {

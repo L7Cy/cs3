@@ -9,8 +9,6 @@ int lcdindex = 0;
 int line1[colums];
 int line2[colums];
 
-// setspecials();
-
 int audioInPin = 0;
 int audioOutPin = 10;
 int ledPin = 13;
