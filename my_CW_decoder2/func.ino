@@ -19,13 +19,13 @@ void calcavg()
   {//最初は1/3？
     highdurationsvg = (highduration + highdurationsvg + highdurationsvg) / 3; // now we know avg dit time ( rolling 3 avg)
   }
-  if (highduration > (5 * highdurationsvg))
+  if ((5 * highdurationsvg) < highduration)
   {
     highdurationsvg = highduration + highdurationsvg; // if speed decrease fast ..
   }
 }
 
-void docode()//初期化と一緒にする？
+void docode()
 {
   if (strcmp(code, ".-") == 0)
     printascii(65);
