@@ -121,39 +121,13 @@ void loop()
     }
   }
 
-  if (filteredstate != filteredstatebefore) //変化したら時間を記録
+  if (filteredstate != filteredstatebefore) //変化したら
   {
     if (filteredstate == HIGH)
     {
       starttimehigh = millis();
       lowduration = (millis() - startttimelow);
-    }
 
-    if (filteredstate == LOW)
-    {
-      startttimelow = millis();
-      highduration = (millis() - starttimehigh);
-      calcavg();
-    }
-  }
-
-  if (filteredstate != filteredstatebefore) //変化したら
-  {
-    if (filteredstate == LOW)
-    {
-      if (highduration < (highdurationsvg * 2) && highduration > (highdurationsvg * 0.6))
-      { /// 0.6 filter out false dits
-        strcat(code, ".");
-      }
-      if (highduration > (highdurationsvg * 2) && highduration < (highdurationsvg * 6))
-      {
-        strcat(code, "-");
-        wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
-      }
-    }
-
-    if (filteredstate == HIGH)
-    {
       float lacktime = 1;
       // checklacktime();
 
@@ -161,7 +135,6 @@ void loop()
       {
         docode();
         count++;
-
         if (lowduration >= highdurationsvg * (5 * lacktime))
         { // word space
           printascii(32);
@@ -171,6 +144,23 @@ void loop()
             count = 0;
           }
         }
+      }
+    }
+
+    if (filteredstate == LOW)
+    {
+      startttimelow = millis();
+      highduration = (millis() - starttimehigh);
+      calcavg();
+
+      if (highduration < (highdurationsvg * 2) && highduration > (highdurationsvg * 0.6)) // highdurationがピッタリ2だったら？
+      {                                                                                   /// 0.6 filter out false dits
+        strcat(code, ".");
+      }
+      if (highduration > (highdurationsvg * 2) && highduration < (highdurationsvg * 6))
+      {
+        strcat(code, "-");
+        wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
     }
   }
