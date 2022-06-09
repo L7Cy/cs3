@@ -16,7 +16,7 @@ void goertzel()
 void calcavg()
 {
   if (highduration < (2 * highdurationsvg) || highdurationsvg == 0)
-  {
+  {//最初は1/3？
     highdurationsvg = (highduration + highdurationsvg + highdurationsvg) / 3; // now we know avg dit time ( rolling 3 avg)
   }
   if (highduration > (5 * highdurationsvg))
