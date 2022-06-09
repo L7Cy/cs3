@@ -60,7 +60,7 @@ long lowduration;
 long laststarttime = 0;
 
 char code[20];
-int stop = LOW;
+
 int wpm;
 
 int count = 0;
@@ -140,7 +140,6 @@ void loop()
 
   if (filteredstate != filteredstatebefore) //変化したら
   {
-    stop = LOW;
     if (filteredstate == LOW)
     {
       if (highduration < (highdurationsvg * 2) && highduration > (highdurationsvg * 0.6))
@@ -178,14 +177,6 @@ void loop()
       }
     }
   }
-
-  // if ((millis() - startttimelow) > (highduration * 6) && stop == LOW)
-  // {
-  //   docode();
-  //   // code[0] = '\0';
-  //   // Serial.println();
-  //   stop = HIGH;
-  // }
 
   if (filteredstate == HIGH)
   {
