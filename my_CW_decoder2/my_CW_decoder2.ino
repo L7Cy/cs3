@@ -139,7 +139,7 @@ void loop()
         if (highdurationsavg * (5 * lacktime) <= lowduration)
         { // word space
           printascii(32);
-          if (50 < count)
+          if (60 < count)
           {
             Serial.println(wpm);
             count = 0;
@@ -169,6 +169,5 @@ void loop()
 
   // updateinfolinelcd();
   realstatebefore = realstate;
-  lasthighduration = highduration;
   filteredstatebefore = filteredstate;
 }

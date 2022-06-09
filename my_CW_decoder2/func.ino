@@ -20,7 +20,7 @@ void calcavg()
     highdurationsavg = highduration;
   }
   if (highduration < (2 * highdurationsavg))
-  {                                                                           //最初は1/3？
+  {
     highdurationsavg = (highduration + highdurationsavg + highdurationsavg) / 3; // now we know avg dit time ( rolling 3 avg)
   }
   if ((5 * highdurationsavg) < highduration)
