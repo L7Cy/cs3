@@ -15,7 +15,7 @@ int ledPin = 13;
 
 float magnitude;
 int magnitudelimit = 100;
-int magnitudelimit_low = 100;//固定
+int magnitudelimit_low = 100; //固定
 int realstate = LOW;
 int realstatebefore = LOW;
 int filteredstate = LOW;
@@ -95,14 +95,14 @@ void loop()
   }
   goertzel();
 
-  if (magnitude > magnitudelimit_low)
+  if (magnitudelimit_low < magnitude)
   {
     magnitudelimit = (magnitudelimit + ((magnitude - magnitudelimit) / 6)); /// moving average filter
     if (magnitudelimit < magnitudelimit_low)                                // magnitudelimit_lowは常にmagnitudelimitよりも小さい
       magnitudelimit = magnitudelimit_low;
   }
 
-  if (magnitude > magnitudelimit * 0.6)
+  if ((magnitudelimit * 0.6) < magnitude)
     realstate = HIGH;
   else
     realstate = LOW;
@@ -112,7 +112,7 @@ void loop()
     laststarttime = millis();
   }
 
-  if ((millis() - laststarttime) > nbtime) //状態を同期させる
+  if (nbtime < (millis() - laststarttime)) //状態を同期させる
   {
     if (realstate != filteredstate) //同じじゃなきゃ同じにする
     {
@@ -130,14 +130,14 @@ void loop()
       float lacktime = 1;
       // checklacktime();
 
-      if (lowduration > (highdurationsvg * (2 * lacktime))) // highdurationsavg*2以上を条件にしたほうがいい
+      if ((highdurationsvg * (2 * lacktime)) < lowduration)
       {
         docode();
         count++;
-        if (lowduration >= highdurationsvg * (5 * lacktime))
+        if (highdurationsvg * (5 * lacktime) <= lowduration)
         { // word space
           printascii(32);
-          if (count > 50)
+          if (50 < count)
           {
             Serial.println(wpm);
             count = 0;
@@ -153,7 +153,7 @@ void loop()
       calcavg();
 
       if ((highdurationsvg * 0.6) < highduration && highduration < (highdurationsvg * 2))
-      {                                                                                   /// 0.6 filter out false dits
+      { /// 0.6 filter out false dits
         strcat(code, ".");
       }
       if ((highdurationsvg * 2) <= highduration && highduration < (highdurationsvg * 6))
