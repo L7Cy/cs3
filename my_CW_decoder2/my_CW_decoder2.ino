@@ -53,7 +53,7 @@ int nbtime = 6; /// ms noise blanker
 long starttimehigh;
 long highduration;
 long lasthighduration;
-long highdurationsvg;
+long highdurationsavg;
 long lowtimesavg;
 long startttimelow;
 long lowduration;
@@ -132,11 +132,11 @@ void loop()
       float lacktime = 1;
       // checklacktime();
 
-      if ((highdurationsvg * (2 * lacktime)) < lowduration)
+      if ((highdurationsavg * (2 * lacktime)) < lowduration)
       {
         docode();
         count++;
-        if (highdurationsvg * (5 * lacktime) <= lowduration)
+        if (highdurationsavg * (5 * lacktime) <= lowduration)
         { // word space
           printascii(32);
           if (50 < count)
@@ -155,11 +155,11 @@ void loop()
 
       digitalWrite(ledPin, LOW);
 
-      if ((highdurationsvg * 0.6) < highduration && highduration < (highdurationsvg * 2))
+      if ((highdurationsavg * 0.6) < highduration && highduration < (highdurationsavg * 2))
       { /// 0.6 filter out false dits
         strcat(code, ".");
       }
-      if ((highdurationsvg * 2) <= highduration && highduration < (highdurationsvg * 6))
+      if ((highdurationsavg * 2) <= highduration && highduration < (highdurationsavg * 6))
       {
         strcat(code, "-");
         wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
