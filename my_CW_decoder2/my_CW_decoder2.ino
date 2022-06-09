@@ -145,8 +145,7 @@ void loop()
         }
       }
     }
-
-    if (filteredstate == LOW)
+    else
     {
       startttimelow = millis();
       highduration = (millis() - starttimehigh);
