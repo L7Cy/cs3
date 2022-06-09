@@ -127,6 +127,8 @@ void loop()
       starttimehigh = millis();
       lowduration = (millis() - startttimelow);
 
+      digitalWrite(ledPin, HIGH);
+
       float lacktime = 1;
       // checklacktime();
 
@@ -151,6 +153,8 @@ void loop()
       highduration = (millis() - starttimehigh);
       calcavg();
 
+      digitalWrite(ledPin, LOW);
+
       if ((highdurationsvg * 0.6) < highduration && highduration < (highdurationsvg * 2))
       { /// 0.6 filter out false dits
         strcat(code, ".");
@@ -161,15 +165,6 @@ void loop()
         wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
     }
-  }
-
-  if (filteredstate == HIGH)
-  {
-    digitalWrite(ledPin, HIGH);
-  }
-  else
-  {
-    digitalWrite(ledPin, LOW);
   }
 
   // updateinfolinelcd();
