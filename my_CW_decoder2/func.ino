@@ -153,6 +153,7 @@ void docode()//初期化と一緒にする？
     Serial.println(wpm);
     count = 0;
   }
+  code[0] = '\0';
   //////////////////
   // The specials //
   //////////////////
@@ -239,24 +240,24 @@ void setspecials()
   byte emtyblock[8] = {B00000, B00000, B00000, B00000, B00000, B00000, B00000, B00000};
 }
 
-void createchars()
-{
-  lcd.createChar(0, U_umlaut);   //     German
-  lcd.createChar(1, O_umlaut);   //     German, Swedish
-  lcd.createChar(2, A_umlaut);   //     German, Swedish
-  lcd.createChar(3, AE_capital); //   Danish, Norwegian
-  lcd.createChar(4, OE_capital); //   Danish, Norwegian
-  lcd.createChar(5, fullblock);
-  lcd.createChar(6, AA_capital); //   Danish, Norwegian, Swedish
-  lcd.createChar(7, emtyblock);
-}
+// void createchars()
+// {
+//   lcd.createChar(0, U_umlaut);   //     German
+//   lcd.createChar(1, O_umlaut);   //     German, Swedish
+//   lcd.createChar(2, A_umlaut);   //     German, Swedish
+//   lcd.createChar(3, AE_capital); //   Danish, Norwegian
+//   lcd.createChar(4, OE_capital); //   Danish, Norwegian
+//   lcd.createChar(5, fullblock);
+//   lcd.createChar(6, AA_capital); //   Danish, Norwegian, Swedish
+//   lcd.createChar(7, emtyblock);
+// }
 
-void checklacktime()
-{
-  if (wpm > 25)
-    lacktime = 1.0; ///  when high speeds we have to have a little more pause before new letter or new word
-  if (wpm > 30)
-    lacktime = 1.2;
-  if (wpm > 35)
-    lacktime = 1.5;
-}
+// void checklacktime()
+// {
+//   if (wpm > 25)
+//     lacktime = 1.0; ///  when high speeds we have to have a little more pause before new letter or new word
+//   if (wpm > 30)
+//     lacktime = 1.2;
+//   if (wpm > 35)
+//     lacktime = 1.5;
+// }

@@ -161,16 +161,16 @@ void loop()
       float lacktime = 1;
       // checklacktime();
 
-      if (lowduration > (highdurationsvg * (2 * lacktime)) && lowduration < highdurationsvg * (5 * lacktime))//highdurationsavg*2以上を条件にしたほうがいい
-      { // print letter
+      if (lowduration > (highdurationsvg * (2 * lacktime)) && lowduration < highdurationsvg * (5 * lacktime)) // highdurationsavg*2以上を条件にしたほうがいい
+      {                                                                                                       // print letter
         docode();
-        code[0] = '\0';
+        // code[0] = '\0';
         count++;
       }
       if (lowduration >= highdurationsvg * (5 * lacktime))
       { // word space
         docode();
-        code[0] = '\0';
+        // code[0] = '\0';
         printascii(32);
         if (count > 50)
         {
@@ -181,23 +181,23 @@ void loop()
     }
   }
 
-  if ((millis() - startttimelow) > (highduration * 6) && stop == LOW)
-  {
-    docode();
-    code[0] = '\0';
-    //    Serial.println();
-    stop = HIGH;
-  }
+  // if ((millis() - startttimelow) > (highduration * 6) && stop == LOW)
+  // {
+  //   docode();
+  //   // code[0] = '\0';
+  //   // Serial.println();
+  //   stop = HIGH;
+  // }
 
   if (filteredstate == HIGH)
   {
     digitalWrite(ledPin, HIGH);
-    tone(audioOutPin, target_freq);
+    //     tone(audioOutPin, target_freq);
   }
   else
   {
     digitalWrite(ledPin, LOW);
-    noTone(audioOutPin);
+    //     noTone(audioOutPin);
   }
 
   // updateinfolinelcd();
