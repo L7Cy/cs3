@@ -1,0 +1,262 @@
+void goertzel()
+{
+  for (char index = 0; index < n; index++)
+  {
+    float Q0;
+    Q0 = coeff * Q1 - Q2 + (float)testData[index];
+    Q2 = Q1;
+    Q1 = Q0;
+  }
+  float magnitudeSquared = (Q1 * Q1) + (Q2 * Q2) - Q1 * Q2 * coeff; // we do only need the real part //
+  magnitude = sqrt(magnitudeSquared);
+  Q2 = 0;
+  Q1 = 0;
+}
+
+void calcavg()
+{
+  if (highduration < (2 * highdurationsvg) || highdurationsvg == 0)
+  {
+    highdurationsvg = (highduration + highdurationsvg + highdurationsvg) / 3; // now we know avg dit time ( rolling 3 avg)
+  }
+  if (highduration > (5 * highdurationsvg))
+  {
+    highdurationsvg = highduration + highdurationsvg; // if speed decrease fast ..
+  }
+}
+
+void docode()
+{
+  if (strcmp(code, ".-") == 0)
+    printascii(65);
+  if (strcmp(code, "-...") == 0)
+    printascii(66);
+  if (strcmp(code, "-.-.") == 0)
+    printascii(67);
+  if (strcmp(code, "-..") == 0)
+    printascii(68);
+  if (strcmp(code, ".") == 0)
+    printascii(69);
+  if (strcmp(code, "..-.") == 0)
+    printascii(70);
+  if (strcmp(code, "--.") == 0)
+    printascii(71);
+  if (strcmp(code, "....") == 0)
+    printascii(72);
+  if (strcmp(code, "..") == 0)
+    printascii(73);
+  if (strcmp(code, ".---") == 0)
+    printascii(74);
+  if (strcmp(code, "-.-") == 0)
+    printascii(75);
+  if (strcmp(code, ".-..") == 0)
+    printascii(76);
+  if (strcmp(code, "--") == 0)
+    printascii(77);
+  if (strcmp(code, "-.") == 0)
+    printascii(78);
+  if (strcmp(code, "---") == 0)
+    printascii(79);
+  if (strcmp(code, ".--.") == 0)
+    printascii(80);
+  if (strcmp(code, "--.-") == 0)
+    printascii(81);
+  if (strcmp(code, ".-.") == 0)
+    printascii(82);
+  if (strcmp(code, "...") == 0)
+    printascii(83);
+  if (strcmp(code, "-") == 0)
+    printascii(84);
+  if (strcmp(code, "..-") == 0)
+    printascii(85);
+  if (strcmp(code, "...-") == 0)
+    printascii(86);
+  if (strcmp(code, ".--") == 0)
+    printascii(87);
+  if (strcmp(code, "-..-") == 0)
+    printascii(88);
+  if (strcmp(code, "-.--") == 0)
+    printascii(89);
+  if (strcmp(code, "--..") == 0)
+    printascii(90);
+
+  if (strcmp(code, ".----") == 0)
+    printascii(49);
+  if (strcmp(code, "..---") == 0)
+    printascii(50);
+  if (strcmp(code, "...--") == 0)
+    printascii(51);
+  if (strcmp(code, "....-") == 0)
+    printascii(52);
+  if (strcmp(code, ".....") == 0)
+    printascii(53);
+  if (strcmp(code, "-....") == 0)
+    printascii(54);
+  if (strcmp(code, "--...") == 0)
+    printascii(55);
+  if (strcmp(code, "---..") == 0)
+    printascii(56);
+  if (strcmp(code, "----.") == 0)
+    printascii(57);
+  if (strcmp(code, "-----") == 0)
+    printascii(48);
+
+  if (strcmp(code, "..--..") == 0)
+    printascii(63);
+  if (strcmp(code, ".-.-.-") == 0)
+    printascii(46);
+  if (strcmp(code, "--..--") == 0)
+    printascii(44);
+  if (strcmp(code, "-.-.--") == 0)
+    printascii(33);
+  if (strcmp(code, ".--.-.") == 0)
+    printascii(64);
+  if (strcmp(code, "---...") == 0)
+    printascii(58);
+  if (strcmp(code, "-....-") == 0)
+    printascii(45);
+  if (strcmp(code, "-..-.") == 0)
+    printascii(47);
+
+  if (strcmp(code, "-.--.") == 0)
+    printascii(40);
+  if (strcmp(code, "-.--.-") == 0)
+    printascii(41);
+  if (strcmp(code, ".-...") == 0)
+    printascii(95);
+  if (strcmp(code, "...-..-") == 0)
+    printascii(36);
+  if (strcmp(code, "...-.-") == 0)
+    printascii(62);
+  if (strcmp(code, ".-.-.") == 0) // AR
+  {
+    printascii(32);
+    printascii(65);
+    printascii(82);
+    Serial.println(wpm);
+    Serial.println();
+    count = 0;
+  }
+  if (strcmp(code, "...-.") == 0)
+    printascii(126);
+  //////////////////
+  // The specials //
+  //////////////////
+  // if (strcmp(code, ".-.-") == 0)
+  //   printascii(3);
+  // if (strcmp(code, "---.") == 0)
+  //   printascii(4);
+  // if (strcmp(code, ".--.-") == 0)
+  //   printascii(6);
+
+  if (strcmp(code, "........") == 0) // HH
+  {
+    printascii(72);
+    printascii(72);
+  }
+  if (strcmp(code, "-...-") == 0) // BT
+  {
+    printascii(32);
+    printascii(66);
+    printascii(84);
+    Serial.println(wpm);
+    count = 0;
+  }
+}
+
+void updateinfolinelcd()
+{
+  int place;
+  if (rows == 4)
+  {
+    place = colums / 2;
+  }
+  else
+  {
+    place = 2;
+  }
+  if (wpm < 10)
+  {
+    lcd.setCursor((place)-2, 0);
+    lcd.print("0");
+    lcd.setCursor((place)-1, 0);
+    lcd.print(wpm);
+    lcd.setCursor((place), 0);
+    lcd.print(" WPM");
+  }
+  else
+  {
+    lcd.setCursor((place)-2, 0);
+    lcd.print(wpm);
+    lcd.setCursor((place), 0);
+    lcd.print(" WPM ");
+  }
+}
+
+void printascii(int asciinumber)
+{
+  Serial.write(asciinumber);
+
+  // int fail = 0;
+  // if (rows == 4 and colums == 16)
+  //   fail = -4; /// to fix the library problem with 4*16 display http://forum.arduino.cc/index.php/topic,14604.0.html
+
+  // if (lcdindex > colums - 1)//端までいったら
+  // {
+  //   lcdindex = 0;
+  //   if (rows == 4)
+  //   {
+  //     for (int i = 0; i <= colums - 1; i++)
+  //     {
+  //       lcd.setCursor(i, rows - 3);
+  //       lcd.write(line2[i]);
+  //       line2[i] = line1[i];
+  //     }
+  //   }
+  //   for (int i = 0; i <= colums - 1; i++)
+  //   {
+  //     lcd.setCursor(i + fail, rows - 2);
+  //     lcd.write(line1[i]);
+  //     lcd.setCursor(i + fail, rows - 1);
+  //     lcd.write(32);
+  //   }
+  // }
+  // line1[lcdindex] = asciinumber;
+  // lcd.setCursor(lcdindex + fail, rows - 1);
+  // lcd.write(asciinumber);
+  // lcdindex += 1;
+}
+
+void setspecials()
+{
+  byte U_umlaut[8] = {B01010, B00000, B10001, B10001, B10001, B10001, B01110, B00000};   // 'Ü'
+  byte O_umlaut[8] = {B01010, B00000, B01110, B10001, B10001, B10001, B01110, B00000};   // 'Ö'
+  byte A_umlaut[8] = {B01010, B00000, B01110, B10001, B11111, B10001, B10001, B00000};   // 'Ä'
+  byte AE_capital[8] = {B01111, B10100, B10100, B11110, B10100, B10100, B10111, B00000}; // 'Æ'
+  byte OE_capital[8] = {B00001, B01110, B10011, B10101, B11001, B01110, B10000, B00000}; // 'Ø'
+  byte fullblock[8] = {B11111, B11111, B11111, B11111, B11111, B11111, B11111, B11111};
+  byte AA_capital[8] = {B00100, B00000, B01110, B10001, B11111, B10001, B10001, B00000}; // 'Å'
+  byte emtyblock[8] = {B00000, B00000, B00000, B00000, B00000, B00000, B00000, B00000};
+}
+
+void createchars()
+{
+  lcd.createChar(0, U_umlaut);   //     German
+  lcd.createChar(1, O_umlaut);   //     German, Swedish
+  lcd.createChar(2, A_umlaut);   //     German, Swedish
+  lcd.createChar(3, AE_capital); //   Danish, Norwegian
+  lcd.createChar(4, OE_capital); //   Danish, Norwegian
+  lcd.createChar(5, fullblock);
+  lcd.createChar(6, AA_capital); //   Danish, Norwegian, Swedish
+  lcd.createChar(7, emtyblock);
+}
+
+void checklacktime()
+{
+  if (wpm > 25)
+    lacktime = 1.0; ///  when high speeds we have to have a little more pause before new letter or new word
+  if (wpm > 30)
+    lacktime = 1.2;
+  if (wpm > 35)
+    lacktime = 1.5;
+}
