@@ -157,19 +157,19 @@ void loop()
       float lacktime = 1;
       // checklacktime();
 
-      if (lowduration > (highdurationsvg * (2 * lacktime)) && lowduration < highdurationsvg * (5 * lacktime)) // highdurationsavg*2以上を条件にしたほうがいい
-      {                                                                                                       // print letter
+      if (lowduration > (highdurationsvg * (2 * lacktime))) // highdurationsavg*2以上を条件にしたほうがいい
+      {
         docode();
         count++;
-      }
-      if (lowduration >= highdurationsvg * (5 * lacktime))
-      { // word space
-        docode();
-        printascii(32);
-        if (count > 50)
-        {
-          Serial.println(wpm);
-          count = 0;
+
+        if (lowduration >= highdurationsvg * (5 * lacktime))
+        { // word space
+          printascii(32);
+          if (count > 50)
+          {
+            Serial.println(wpm);
+            count = 0;
+          }
         }
       }
     }
