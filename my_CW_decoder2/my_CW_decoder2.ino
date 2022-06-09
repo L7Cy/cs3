@@ -1,13 +1,13 @@
-#include <LiquidCrystal.h>
+// #include <LiquidCrystal.h>
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+// LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-const int colums = 20; /// have to be 16 or 20
-const int rows = 4;    /// have to be 2 or 4
+// const int colums = 20; /// have to be 16 or 20
+// const int rows = 4;    /// have to be 2 or 4
 
-int lcdindex = 0;
-int line1[colums];
-int line2[colums];
+// int lcdindex = 0;
+// int line1[colums];
+// int line2[colums];
 
 int audioInPin = 0;
 int audioOutPin = 10;
@@ -75,16 +75,16 @@ void setup()
   cosine = cos(omega);
   coeff = 2.0 * cosine;
 
-  lcd.clear();
-
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
-  lcd.begin(colums, rows);
-  for (int index = 0; index < colums; index++)
-  {
-    line1[index] = 32;
-    line2[index] = 32;
-  }
+
+  // lcd.clear();
+  // lcd.begin(colums, rows);
+  // for (int index = 0; index < colums; index++)
+  // {
+  //   line1[index] = 32;
+  //   line2[index] = 32;
+  // }
 }
 
 void loop()
