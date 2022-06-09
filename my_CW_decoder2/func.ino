@@ -29,7 +29,7 @@ void calcavg()
   }
 }
 
-void docode()
+void decode()
 {
   if (strcmp(code, ".-") == 0)
     printascii(65);
@@ -139,7 +139,7 @@ void docode()
     printascii(82);
     Serial.println(wpm);
     Serial.println();
-    count = 0;
+    charcount = 0;
   }
   if (strcmp(code, "...-.") == 0)
     printascii(126);
@@ -155,7 +155,7 @@ void docode()
     printascii(66);
     printascii(84);
     Serial.println(wpm);
-    count = 0;
+    charcount = 0;
   }
   code[0] = '\0';
 }

@@ -44,7 +44,7 @@ float Q2 = 0;
 float sine;
 float cosine;
 float sampling_freq = 8928.0;
-float target_freq = 744.0; /// adjust for your needs see above
+float target_freq = 744.0;
 float n = 48.0;
 int testData[48];
 
@@ -53,7 +53,6 @@ int nbtime = 6; /// ms noise blanker
 long starttimehigh;
 long highduration;
 long highdurationsavg;
-long lowtimesavg;
 long startttimelow;
 long lowduration;
 long laststarttime = 0;
@@ -62,7 +61,7 @@ char code[20];
 
 int wpm;
 
-int count = 0;
+int charcount = 0;
 
 void setup()
 {
@@ -106,20 +105,20 @@ void loop()
   else
     realstate = LOW;
 
-  if (realstate != realstatebefore) //変化したら
+  if (realstate != realstatebefore)
   {
     laststarttime = millis();
   }
 
-  if (nbtime < (millis() - laststarttime)) //状態を同期させる
+  if (nbtime < (millis() - laststarttime))
   {
-    if (realstate != filteredstate) //同じじゃなきゃ同じにする
+    if (realstate != filteredstate)
     {
       filteredstate = realstate;
     }
   }
 
-  if (filteredstate != filteredstatebefore) //変化したら
+  if (filteredstate != filteredstatebefore)
   {
     if (filteredstate == HIGH)
     {
@@ -133,15 +132,15 @@ void loop()
 
       if ((highdurationsavg * (2 * lacktime)) < lowduration)
       {
-        docode();
-        count++;
+        decode();
+        charcount++;
         if (highdurationsavg * (5 * lacktime) <= lowduration)
         { // word space
           printascii(32);
-          if (60 < count)
+          if (60 < charcount)
           {
             Serial.println(wpm);
-            count = 0;
+            charcount = 0;
           }
         }
       }
@@ -155,7 +154,7 @@ void loop()
       digitalWrite(ledPin, LOW);
 
       if ((highdurationsavg * 0.6) < highduration && highduration < (highdurationsavg * 2))
-      { /// 0.6 filter out false dits
+      {
         strcat(code, ".");
       }
       if ((highdurationsavg * 2) <= highduration && highduration < (highdurationsavg * 6))
