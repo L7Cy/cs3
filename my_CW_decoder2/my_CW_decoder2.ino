@@ -48,7 +48,7 @@ float target_freq = 744.0;
 float n = 48.0;
 int testData[48];
 
-int nbtime = 6; /// ms noise blanker
+int nbtime = 20; /// ms noise blanker
 
 long starttimehigh;
 long highduration;
@@ -156,10 +156,12 @@ void loop()
       if ((highdurationsavg * 0.6) < highduration && highduration < (highdurationsavg * 2))
       {
         strcat(code, ".");
+        // Serial.write(".");
       }
       if ((highdurationsavg * 2) <= highduration && highduration < (highdurationsavg * 6))
       {
         strcat(code, "-");
+        // Serial.write("-");
         wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
     }
