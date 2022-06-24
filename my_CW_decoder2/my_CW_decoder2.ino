@@ -24,14 +24,14 @@ int nbtime = 6; /// ms noise blanker
 
 long starttimehigh;
 long highduration;
-long highdurationsavg;
+long highdurationsavg = 100;
 long startttimelow;
 long lowduration;
 long laststarttime = 0;
 
 char code[20];
 
-int wpm;
+int wpm = 15;
 
 int charcount = 0;
 
@@ -122,11 +122,15 @@ void loop()
       if ((highdurationsavg * 0.6) < highduration && highduration < (highdurationsavg * 2))
       {
         strcat(code, ".");
+//        Serial.print(highdurationsavg);
+//        Serial.print(",");
         // Serial.write(".");
       }
       if ((highdurationsavg * 2) <= highduration && highduration < (highdurationsavg * 6))
       {
         strcat(code, "-");
+//        Serial.print(highdurationsavg);
+//        Serial.print(",");
         // Serial.write("-");
         wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
