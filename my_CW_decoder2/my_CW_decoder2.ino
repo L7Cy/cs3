@@ -1,5 +1,4 @@
 int audioInPin = 0;
-int audioOutPin = 10;
 int ledPin = 13;
 
 float magnitude;
@@ -24,7 +23,7 @@ int nbtime = 6; /// ms noise blanker
 
 long starttimehigh;
 long highduration;
-long highdurationsavg = 100;
+long highdurationsavg = 65;
 long startttimelow;
 long lowduration;
 long laststarttime = 0;
@@ -35,7 +34,8 @@ int wpm = 15;
 
 int charcount = 0;
 
-boolean wabun = true;
+boolean wabun = false;
+boolean hore = false;
 
 void setup()
 {
@@ -62,7 +62,7 @@ void loop()
   if (magnitudelimit_low < magnitude)
   {
     magnitudelimit = (magnitudelimit + ((magnitude - magnitudelimit) / 6)); /// moving average filter
-    if (magnitudelimit < magnitudelimit_low)                                // magnitudelimit_lowは常にmagnitudelimitよりも小さい
+    if (magnitudelimit < magnitudelimit_low)
       magnitudelimit = magnitudelimit_low;
   }
 
@@ -93,17 +93,14 @@ void loop()
 
       digitalWrite(ledPin, HIGH);
 
-      float lacktime = 1;
-      // checklacktime();
-
-      if ((highdurationsavg * (2 * lacktime)) < lowduration)
+      if ((highdurationsavg * 2) < lowduration)
       {
         decode();
         charcount++;
-        if (highdurationsavg * (5 * lacktime) <= lowduration)
-        { // word space
-          printascii(32);
-          if (60 < charcount)
+        if (highdurationsavg * 5 <= lowduration)
+        {
+          Serial.write(" ");
+          if (40 < charcount)
           {
             Serial.println();
             charcount = 0;
@@ -122,16 +119,10 @@ void loop()
       if ((highdurationsavg * 0.6) < highduration && highduration < (highdurationsavg * 2))
       {
         strcat(code, ".");
-//        Serial.print(highdurationsavg);
-//        Serial.print(",");
-        // Serial.write(".");
       }
       if ((highdurationsavg * 2) <= highduration && highduration < (highdurationsavg * 6))
       {
         strcat(code, "-");
-//        Serial.print(highdurationsavg);
-//        Serial.print(",");
-        // Serial.write("-");
         wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
     }
@@ -142,7 +133,6 @@ void loop()
     decode();
   }
 
-  // updateinfolinelcd();
   realstatebefore = realstate;
   filteredstatebefore = filteredstate;
 }

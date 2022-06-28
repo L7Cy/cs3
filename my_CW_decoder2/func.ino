@@ -27,317 +27,246 @@ void calcavg()
 
 void decode()
 {
-  if(wabun==false)
+  // 0 to 9
+  if (strcmp(code, "-----") == 0)
+    Serial.write("0");
+  if (strcmp(code, ".----") == 0)
+    Serial.write("1");
+  if (strcmp(code, "..---") == 0)
+    Serial.write("2");
+  if (strcmp(code, "...--") == 0)
+    Serial.write("3");
+  if (strcmp(code, "....-") == 0)
+    Serial.write("4");
+  if (strcmp(code, ".....") == 0)
+    Serial.write("5");
+  if (strcmp(code, "-....") == 0)
+    Serial.write("6");
+  if (strcmp(code, "--...") == 0)
+    Serial.write("7");
+  if (strcmp(code, "---..") == 0)
+    Serial.write("8");
+  if (strcmp(code, "----.") == 0)
+    Serial.write("9");
+
+  if (wabun == false)
   {
-    //a to z
+    // a to z
     if (strcmp(code, ".-") == 0)
-      printascii(65);
+      Serial.write("A");
     if (strcmp(code, "-...") == 0)
-      printascii(66);
+      Serial.write("B");
     if (strcmp(code, "-.-.") == 0)
-      printascii(67);
+      Serial.write("C");
     if (strcmp(code, "-..") == 0)
-      printascii(68);
+      Serial.write("D");
     if (strcmp(code, ".") == 0)
-      printascii(69);
+      Serial.write("E");
     if (strcmp(code, "..-.") == 0)
-      printascii(70);
+      Serial.write("F");
     if (strcmp(code, "--.") == 0)
-      printascii(71);
+      Serial.write("G");
     if (strcmp(code, "....") == 0)
-      printascii(72);
+      Serial.write("H");
     if (strcmp(code, "..") == 0)
-      printascii(73);
+      Serial.write("I");
     if (strcmp(code, ".---") == 0)
-      printascii(74);
+      Serial.write("J");
     if (strcmp(code, "-.-") == 0)
-      printascii(75);
+      Serial.write("K");
     if (strcmp(code, ".-..") == 0)
-      printascii(76);
+      Serial.write("L");
     if (strcmp(code, "--") == 0)
-      printascii(77);
+      Serial.write("M");
     if (strcmp(code, "-.") == 0)
-      printascii(78);
+      Serial.write("N");
     if (strcmp(code, "---") == 0)
-      printascii(79);
+      Serial.write("O");
     if (strcmp(code, ".--.") == 0)
-      printascii(80);
+      Serial.write("P");
     if (strcmp(code, "--.-") == 0)
-      printascii(81);
+      Serial.write("Q");
     if (strcmp(code, ".-.") == 0)
-      printascii(82);
+      Serial.write("R");
     if (strcmp(code, "...") == 0)
-      printascii(83);
+      Serial.write("S");
     if (strcmp(code, "-") == 0)
-      printascii(84);
+      Serial.write("T");
     if (strcmp(code, "..-") == 0)
-      printascii(85);
+      Serial.write("U");
     if (strcmp(code, "...-") == 0)
-      printascii(86);
+      Serial.write("V");
     if (strcmp(code, ".--") == 0)
-      printascii(87);
+      Serial.write("W");
     if (strcmp(code, "-..-") == 0)
-      printascii(88);
+      Serial.write("X");
     if (strcmp(code, "-.--") == 0)
-      printascii(89);
+      Serial.write("y");
     if (strcmp(code, "--..") == 0)
-      printascii(90);
+      Serial.write("Z");
 
-    //0 to 9
-    if (strcmp(code, ".----") == 0)
-      printascii(49);
-    if (strcmp(code, "..---") == 0)
-      printascii(50);
-    if (strcmp(code, "...--") == 0)
-      printascii(51);
-    if (strcmp(code, "....-") == 0)
-      printascii(52);
-    if (strcmp(code, ".....") == 0)
-      printascii(53);
-    if (strcmp(code, "-....") == 0)
-      printascii(54);
-    if (strcmp(code, "--...") == 0)
-      printascii(55);
-    if (strcmp(code, "---..") == 0)
-      printascii(56);
-    if (strcmp(code, "----.") == 0)
-      printascii(57);
-    if (strcmp(code, "-----") == 0)
-      printascii(48);
-
-    if (strcmp(code, "..--..") == 0)//'?'
-      printascii(63);
-    if (strcmp(code, ".-.-.-") == 0)//'.'
-      printascii(46);
-    if (strcmp(code, "--..--") == 0)//','
-      printascii(44);
-    if (strcmp(code, "-.-.--") == 0)//''
-      printascii(33);
-    if (strcmp(code, ".--.-.") == 0)//'@'
-      printascii(64);
-    if (strcmp(code, "---...") == 0)//':'
-      printascii(58);
-    if (strcmp(code, "-....-") == 0)//'='
-      printascii(45);
+    if (strcmp(code, ".-.-.-") == 0)
+      Serial.write(".");
+    if (strcmp(code, "--..--") == 0)
+      Serial.write(",");
+    if (strcmp(code, "---...") == 0)
+      Serial.write(":");
+    if (strcmp(code, "..--..") == 0)
+      Serial.write("?");
+    if (strcmp(code, ".----.") == 0)
+      Serial.write("'");
+    if (strcmp(code, "-....-") == 0)
+      Serial.write("-");
+    if (strcmp(code, "-.--.") == 0)
+      Serial.write("(");
+    if (strcmp(code, "-.--.-") == 0)
+      Serial.write(")");
     if (strcmp(code, "-..-.") == 0)
-      printascii(47);
-
-    if (strcmp(code, "-.--.") == 0)//'('
-      printascii(40);
-    if (strcmp(code, "-.--.-") == 0)//')'
-      Serial.write(")");
-    if (strcmp(code, ".-..-.") == 0)//和文にもどるやつ
+      Serial.write("/");
+    if (strcmp(code, "-...-") == 0)
+      Serial.write("=");
+    if (strcmp(code, ".-.-.") == 0)
+      Serial.write("+");
+    if (hore == true)
     {
-      Serial.write(")");
-      wabun=true;
+      if (strcmp(code, ".-..-.") == 0) //和文にもどるやつ
+      {
+        Serial.write(")");
+        wabun = true;
+      }
     }
-    if (strcmp(code, ".-...") == 0)
-      printascii(95);
-    if (strcmp(code, "...-..-") == 0)
-      printascii(36);
-    if (strcmp(code, "...-.-") == 0)
-      printascii(62);
-    if (strcmp(code, "...-.") == 0)
-      printascii(126);
-    if (strcmp(code, ".-.-.") == 0) // AR
+    else
     {
-      printascii(32);
-      printascii(65);
-      printascii(82);
-      Serial.println(wpm);
-      Serial.println();
-      charcount = 0;
+      if (strcmp(code, ".-..-.") == 0)
+      {
+        Serial.write('"');
+      }
     }
 
-    if (strcmp(code, "........") == 0) // HH
-    {
-      printascii(72);
-      printascii(72);
-    }
-    if (strcmp(code, "-...-") == 0) // BT
-    {
-      printascii(32);
-      printascii(66);
-      printascii(84);
-      Serial.println(wpm);
-      charcount = 0;
-    }
+    if (strcmp(code, ".--.-.") == 0)
+      Serial.write("@");
   }
   else
   {
     //アからン
-    if (strcmp(code, "--.--") == 0) //"ア"
+    if (strcmp(code, "--.--") == 0)
       Serial.write("ア");
-    if (strcmp(code, ".-") == 0) //"イ"
+    if (strcmp(code, ".-") == 0)
       Serial.write("イ");
-    if (strcmp(code, "..-") == 0) //"ウ"
+    if (strcmp(code, "..-") == 0)
       Serial.write("ウ");
-    if (strcmp(code, "-.---") == 0) //"エ"
+    if (strcmp(code, "-.---") == 0)
       Serial.write("エ");
-    if (strcmp(code, ".-...") == 0) //"オ"
+    if (strcmp(code, ".-...") == 0)
       Serial.write("オ");
-    if (strcmp(code, ".-..") == 0) //"カ"
+    if (strcmp(code, ".-..") == 0)
       Serial.write("カ");
-    if (strcmp(code, "-.-..") == 0) //"キ"
+    if (strcmp(code, "-.-..") == 0)
       Serial.write("キ");
-    if (strcmp(code, "...-") == 0) //"ク"
+    if (strcmp(code, "...-") == 0)
       Serial.write("ク");
-    if (strcmp(code, "-.--") == 0) //"ケ"
+    if (strcmp(code, "-.--") == 0)
       Serial.write("ケ");
-    if (strcmp(code, "----") == 0) //"コ"
+    if (strcmp(code, "----") == 0)
       Serial.write("コ");
-    if (strcmp(code, "-.-.-") == 0) //"サ"
+    if (strcmp(code, "-.-.-") == 0)
       Serial.write("サ");
-    if (strcmp(code, "--.-.") == 0) //"シ"
+    if (strcmp(code, "--.-.") == 0)
       Serial.write("シ");
-    if (strcmp(code, "---.-") == 0) //"ス"
+    if (strcmp(code, "---.-") == 0)
       Serial.write("ス");
-    if (strcmp(code, ".---.") == 0) //"セ"
+    if (strcmp(code, ".---.") == 0)
       Serial.write("セ");
-    if (strcmp(code, "---.") == 0) //"ソ"
+    if (strcmp(code, "---.") == 0)
       Serial.write("ソ");
-    if (strcmp(code, "-.") == 0) //"タ"
+    if (strcmp(code, "-.") == 0)
       Serial.write("タ");
-    if (strcmp(code, "..-.") == 0) //"チ"
+    if (strcmp(code, "..-.") == 0)
       Serial.write("チ");
-    if (strcmp(code, ".--.") == 0) //"ツ"
+    if (strcmp(code, ".--.") == 0)
       Serial.write("ツ");
-    if (strcmp(code, ".-.--") == 0) //"テ"
+    if (strcmp(code, ".-.--") == 0)
       Serial.write("テ");
-    if (strcmp(code, "..-..") == 0) //"ト"
+    if (strcmp(code, "..-..") == 0)
       Serial.write("ト");
-    if (strcmp(code, ".-.") == 0) //"ナ"
+    if (strcmp(code, ".-.") == 0)
       Serial.write("ナ");
-    if (strcmp(code, "-.-.") == 0) //"ニ"
+    if (strcmp(code, "-.-.") == 0)
       Serial.write("ニ");
-    if (strcmp(code, "....") == 0) //"ヌ"
+    if (strcmp(code, "....") == 0)
       Serial.write("ヌ");
-    if (strcmp(code, "--.-") == 0) //"ネ"
+    if (strcmp(code, "--.-") == 0)
       Serial.write("ネ");
-    if (strcmp(code, "..--") == 0) //"ノ"
+    if (strcmp(code, "..--") == 0)
       Serial.write("ノ");
-    if (strcmp(code, "-...") == 0) //"ハ"
+    if (strcmp(code, "-...") == 0)
       Serial.write("ハ");
-    if (strcmp(code, "--..-") == 0) //"ヒ"
+    if (strcmp(code, "--..-") == 0)
       Serial.write("ヒ");
-    if (strcmp(code, "--..") == 0) //"フ"
+    if (strcmp(code, "--..") == 0)
       Serial.write("フ");
-    if (strcmp(code, ".") == 0) //"ヘ"
+    if (strcmp(code, ".") == 0)
       Serial.write("ヘ");
-    if (strcmp(code, "-..") == 0) //"ホ"
+    if (strcmp(code, "-..") == 0)
       Serial.write("ホ");
-    if (strcmp(code, "-..-") == 0) //"マ"
+    if (strcmp(code, "-..-") == 0)
       Serial.write("マ");
-    if (strcmp(code, "..-.-") == 0) //"ミ"
+    if (strcmp(code, "..-.-") == 0)
       Serial.write("ミ");
-    if (strcmp(code, "-") == 0) //"ム"
+    if (strcmp(code, "-") == 0)
       Serial.write("ム");
-    if (strcmp(code, "-...-") == 0) //"メ"
+    if (strcmp(code, "-...-") == 0)
       Serial.write("メ");
-    if (strcmp(code, "-..-.") == 0) //"モ"
+    if (strcmp(code, "-..-.") == 0)
       Serial.write("モ");
-    if (strcmp(code, ".--") == 0) //"ヤ"
+    if (strcmp(code, ".--") == 0)
       Serial.write("ヤ");
-    if (strcmp(code, "-..--") == 0) //"ユ"
+    if (strcmp(code, "-..--") == 0)
       Serial.write("ユ");
-    if (strcmp(code, "--") == 0) //"ヨ"
+    if (strcmp(code, "--") == 0)
       Serial.write("ヨ");
-    if (strcmp(code, "...") == 0) //"ラ"
+    if (strcmp(code, "...") == 0)
       Serial.write("ラ");
-    if (strcmp(code, "--.") == 0) //"リ"
+    if (strcmp(code, "--.") == 0)
       Serial.write("リ");
-    if (strcmp(code, "-.--.") == 0) //"ル"
+    if (strcmp(code, "-.--.") == 0)
       Serial.write("ル");
-    if (strcmp(code, "---") == 0) //"レ"
+    if (strcmp(code, "---") == 0)
       Serial.write("レ");
-    if (strcmp(code, ".-.-") == 0) //"ロ"
+    if (strcmp(code, ".-.-") == 0)
       Serial.write("ロ");
-    if (strcmp(code, "-.-") == 0) //"ワ"
+    if (strcmp(code, "-.-") == 0)
       Serial.write("ワ");
-    // if (strcmp(code, ".-..-") == 0) //"ヰ"
-    //   printascii();
-    if (strcmp(code, ".---") == 0) //"ヲ"
+    if (strcmp(code, ".---") == 0)
       Serial.write("ヲ");
-    // if (strcmp(code, ".--..") == 0) //"ヱ"
-    //   printascii();
-    if (strcmp(code, ".-.-.") == 0) //"ン"
+    if (strcmp(code, ".-.-.") == 0)
       Serial.write("ン");
 
-    // 0 to 9
-    if (strcmp(code, "-----") == 0)
-      printascii(48);
-    if (strcmp(code, ".----") == 0)
-      printascii(49);
-    if (strcmp(code, "..---") == 0)
-      printascii(50);
-    if (strcmp(code, "...--") == 0)
-      printascii(51);
-    if (strcmp(code, "....-") == 0)
-      printascii(52);
-    if (strcmp(code, ".....") == 0)
-      printascii(53);
-    if (strcmp(code, "-....") == 0)
-      printascii(54);
-    if (strcmp(code, "--...") == 0)
-      printascii(55);
-    if (strcmp(code, "---..") == 0)
-      printascii(56);
-    if (strcmp(code, "----.") == 0)
-      printascii(57);
-
-    if (strcmp(code, "..") == 0) //"濁点"
+    if (strcmp(code, "..") == 0)
       Serial.write("゛");
-    if (strcmp(code, "..--.") == 0) //"半濁点"
+    if (strcmp(code, "..--.") == 0)
       Serial.write("゜");
-    if (strcmp(code, "-.--.-") == 0) //"("
+    if (strcmp(code, ".--.-") == 0)
+      Serial.write("ー");
+    if (strcmp(code, ".-.-.-") == 0)
+      Serial.write("、");
+    if (strcmp(code, "-.--.-") == 0)
     {
       Serial.write("(");
       wabun = false;
     }
-    // if (strcmp(code, ".-..-.") == 0) //")"
-    // {
-    //   Serial.write(")");
-    //   wabun = true;
-    // }
-    if (strcmp(code, ".-.-.-") == 0) //"、"
-      Serial.write("、");
-    if (strcmp(code, "-..---") == 0) // AR
-    {
-      printascii(32);
-      printascii(65);
-      printascii(82);
-      Serial.println(wpm);
-      Serial.println();
-      charcount = 0;
-    }
-    if (strcmp(code, "...-.") == 0) // HH
-    {
-      printascii(72);
-      printascii(72);
-    }
-    if (strcmp(code, "..--..") == 0) // BT
-    {
-      printascii(32);
-      printascii(66);
-      printascii(84);
-      Serial.println(wpm);
-      charcount = 0;
-    }
   }
+
+  if (strcmp(code, "-..---") == 0) // ホレ
+  {
+    wabun = true;
+    hore = true;
+  }
+  if (strcmp(code, "...-.") == 0) // ラタ
+  {
+    wabun = false;
+    hore = false;
+  }
+
   code[0] = '\0';
 }
-
-void printascii(int asciinumber)
-{
-  Serial.write(asciinumber);
-}
-
-// void checklacktime()
-// {
-//   if (wpm > 25)
-//     lacktime = 1.0; ///  when high speeds we have to have a little more pause before new letter or new word
-//   if (wpm > 30)
-//     lacktime = 1.2;
-//   if (wpm > 35)
-//     lacktime = 1.5;
-// }
