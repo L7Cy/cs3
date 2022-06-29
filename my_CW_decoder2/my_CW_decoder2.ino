@@ -30,8 +30,6 @@ long laststarttime = 0;
 
 char code[20];
 
-int wpm = 15;
-
 int charcount = 0;
 
 boolean wabun = false;
@@ -123,12 +121,11 @@ void loop()
       if ((highdurationsavg * 2) <= highduration && highduration < (highdurationsavg * 6))
       {
         strcat(code, "-");
-        wpm = (wpm + (1200 / ((highduration) / 3))) / 2;
       }
     }
   }
 
-  if ((millis() - startttimelow) > (highduration * 6))
+  if ((highduration * 6) < (millis() - startttimelow))
   {
     decode();
   }

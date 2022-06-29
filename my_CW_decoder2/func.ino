@@ -145,6 +145,122 @@ void decode()
 
     if (strcmp(code, ".--.-.") == 0)
       Serial.write("@");
+
+
+    if (strcmp(code, "-.---") == 0)
+    {
+      Serial.write("エ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, ".-...") == 0)
+    {
+      Serial.write("オ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "-.-..") == 0)
+    {
+      Serial.write("キ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "----") == 0)
+    {
+      Serial.write("コ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "-.-.-") == 0)
+    {
+      Serial.write("サ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "--.-.") == 0)
+    {
+      Serial.write("シ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "---.-") == 0)
+    {
+      Serial.write("ス");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, ".---.") == 0)
+    {
+      Serial.write("セ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "---.") == 0)
+    {
+      Serial.write("ソ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, ".-.--") == 0)
+    {
+      Serial.write("テ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "..-..") == 0)
+    {
+      Serial.write("ト");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "..--") == 0)
+    {
+      Serial.write("ノ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "--..-") == 0)
+    {
+      Serial.write("ヒ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "..-.-") == 0)
+    {
+      Serial.write("ミ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "-..--") == 0)
+    {
+      Serial.write("ユ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, ".-.-") == 0)
+    {
+      Serial.write("ロ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "-.-") == 0)
+    {
+      Serial.write("ワ");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, "..--.") == 0)
+    {
+      Serial.write("゜");
+      wabun = true;
+      hore = true;
+    }
+    if (strcmp(code, ".--.-") == 0)
+    {
+      Serial.write("ー");
+      wabun = true;
+      hore = true;
+    }
   }
   else
   {
@@ -254,6 +370,44 @@ void decode()
     {
       Serial.write("(");
       wabun = false;
+    }
+
+
+    if (strcmp(code, "--..--") == 0)
+    {
+      Serial.write(",");
+      wabun = false;
+      hore = false;
+    }
+    if (strcmp(code, "---...") == 0)
+    {
+      Serial.write(":");
+      wabun = false;
+      hore = false;
+    }
+    if (strcmp(code, "..--..") == 0)
+    {
+      Serial.write("?");
+      wabun = false;
+      hore = false;
+    }
+    if (strcmp(code, ".----.") == 0)
+    {
+      Serial.write("'");
+      wabun = false;
+      hore = false;
+    }
+    if (strcmp(code, "-....-") == 0)
+    {
+      Serial.write("-");
+      wabun = false;
+      hore = false;
+    }
+    if (strcmp(code, ".--.-.") == 0)
+    {
+      Serial.write("@");
+      wabun = false;
+      hore = false;
     }
   }
 
