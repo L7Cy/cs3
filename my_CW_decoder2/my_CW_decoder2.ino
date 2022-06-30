@@ -1,5 +1,4 @@
 int audioInPin = 0;
-int ledPin = 13;
 
 float magnitude;
 int magnitudelimit = 100;
@@ -46,7 +45,6 @@ void setup()
   coeff = 2.0 * cosine;
 
   Serial.begin(9600);
-  pinMode(ledPin, OUTPUT);
 }
 
 void loop()
@@ -99,10 +97,6 @@ void loop()
       starttimehigh = millis();
       lowduration = (millis() - startttimelow);
 
-      digitalWrite(ledPin, HIGH);
-
-      //      Serial.println(highdurationsavg);
-
       if ((highdurationsavg * 2) < lowduration)
       {
         decode();
@@ -127,8 +121,6 @@ void loop()
       {
         highdurationsavg = (highduration + highdurationsavg + highdurationsavg) / 3;
       }
-
-      digitalWrite(ledPin, LOW);
 
       if ((highdurationsavg * 0.6) < highduration && highduration < (highdurationsavg * 2))
       {
