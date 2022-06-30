@@ -1,30 +1,3 @@
-void goertzel()
-{
-  for (char index = 0; index < n; index++)
-  {
-    float Q0;
-    Q0 = coeff * Q1 - Q2 + (float)testData[index];
-    Q2 = Q1;
-    Q1 = Q0;
-  }
-  float magnitudeSquared = (Q1 * Q1) + (Q2 * Q2) - Q1 * Q2 * coeff; // we do only need the real part //
-  magnitude = sqrt(magnitudeSquared);
-  Q2 = 0;
-  Q1 = 0;
-}
-
-void calcavg()
-{
-  if (highduration < (1.2 * highdurationsavg))
-  {
-    highdurationsavg = (highduration + highdurationsavg + highdurationsavg) / 3; // now we know avg dit time ( rolling 3 avg)
-  }
-  if ((5 * highdurationsavg) < highduration)
-  {
-    highdurationsavg = highduration; // if speed decrease fast ..
-  }
-}
-
 void decode()
 {
   // 0 to 9
@@ -146,120 +119,29 @@ void decode()
     if (strcmp(code, ".--.-.") == 0)
       Serial.write("@");
 
-
-    if (strcmp(code, "-.---") == 0)
+    if (strcmp(code, "-.---") == 0 ||
+        strcmp(code, ".-...") == 0 ||
+        strcmp(code, "-.-..") == 0 ||
+        strcmp(code, "----") == 0 ||
+        strcmp(code, "-.-.-") == 0 ||
+        strcmp(code, "--.-.") == 0 ||
+        strcmp(code, "---.-") == 0 ||
+        strcmp(code, ".---.") == 0 ||
+        strcmp(code, "---.") == 0 ||
+        strcmp(code, ".-.--") == 0 ||
+        strcmp(code, "..-..") == 0 ||
+        strcmp(code, "..--") == 0 ||
+        strcmp(code, "--..-") == 0 ||
+        strcmp(code, "..-.-") == 0 ||
+        strcmp(code, "-..--") == 0 ||
+        strcmp(code, ".-.-") == 0 ||
+        strcmp(code, "-.-") == 0 ||
+        strcmp(code, "..--.") == 0 ||
+        strcmp(code, ".--.-") == 0)
     {
-      Serial.write("エ");
       wabun = true;
       hore = true;
-    }
-    if (strcmp(code, ".-...") == 0)
-    {
-      Serial.write("オ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "-.-..") == 0)
-    {
-      Serial.write("キ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "----") == 0)
-    {
-      Serial.write("コ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "-.-.-") == 0)
-    {
-      Serial.write("サ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "--.-.") == 0)
-    {
-      Serial.write("シ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "---.-") == 0)
-    {
-      Serial.write("ス");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, ".---.") == 0)
-    {
-      Serial.write("セ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "---.") == 0)
-    {
-      Serial.write("ソ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, ".-.--") == 0)
-    {
-      Serial.write("テ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "..-..") == 0)
-    {
-      Serial.write("ト");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "..--") == 0)
-    {
-      Serial.write("ノ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "--..-") == 0)
-    {
-      Serial.write("ヒ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "..-.-") == 0)
-    {
-      Serial.write("ミ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "-..--") == 0)
-    {
-      Serial.write("ユ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, ".-.-") == 0)
-    {
-      Serial.write("ロ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "-.-") == 0)
-    {
-      Serial.write("ワ");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, "..--.") == 0)
-    {
-      Serial.write("゜");
-      wabun = true;
-      hore = true;
-    }
-    if (strcmp(code, ".--.-") == 0)
-    {
-      Serial.write("ー");
-      wabun = true;
-      hore = true;
+      decode();
     }
   }
   else
@@ -372,43 +254,18 @@ void decode()
       wabun = false;
     }
 
+    if (strcmp(code, "--..--") == 0 ||
+        strcmp(code, "---...") == 0 ||
+        strcmp(code, "..--..") == 0 ||
+        strcmp(code, ".----.") == 0 ||
+        strcmp(code, "-....-") == 0 ||
+        strcmp(code, ".--.-.") == 0)
+    {
+      wabun = false;
+      hore = false;
+      decode();
+    }
 
-    if (strcmp(code, "--..--") == 0)
-    {
-      Serial.write(",");
-      wabun = false;
-      hore = false;
-    }
-    if (strcmp(code, "---...") == 0)
-    {
-      Serial.write(":");
-      wabun = false;
-      hore = false;
-    }
-    if (strcmp(code, "..--..") == 0)
-    {
-      Serial.write("?");
-      wabun = false;
-      hore = false;
-    }
-    if (strcmp(code, ".----.") == 0)
-    {
-      Serial.write("'");
-      wabun = false;
-      hore = false;
-    }
-    if (strcmp(code, "-....-") == 0)
-    {
-      Serial.write("-");
-      wabun = false;
-      hore = false;
-    }
-    if (strcmp(code, ".--.-.") == 0)
-    {
-      Serial.write("@");
-      wabun = false;
-      hore = false;
-    }
   }
 
   if (strcmp(code, "-..---") == 0) // ホレ

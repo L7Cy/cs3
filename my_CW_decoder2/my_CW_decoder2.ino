@@ -23,7 +23,7 @@ int nbtime = 6; /// ms noise blanker
 
 long starttimehigh;
 long highduration;
-long highdurationsavg = 65;
+long highdurationsavg = 60;
 long startttimelow;
 long lowduration;
 long laststarttime = 0;
@@ -55,7 +55,17 @@ void loop()
   {
     testData[index] = analogRead(audioInPin);
   }
-  goertzel();
+  for (char index = 0; index < n; index++)
+  {
+    float Q0;
+    Q0 = coeff * Q1 - Q2 + (float)testData[index];
+    Q2 = Q1;
+    Q1 = Q0;
+  }
+  float magnitudeSquared = (Q1 * Q1) + (Q2 * Q2) - Q1 * Q2 * coeff; // we do only need the real part //
+  magnitude = sqrt(magnitudeSquared);
+  Q2 = 0;
+  Q1 = 0;
 
   if (magnitudelimit_low < magnitude)
   {
@@ -91,6 +101,8 @@ void loop()
 
       digitalWrite(ledPin, HIGH);
 
+      //      Serial.println(highdurationsavg);
+
       if ((highdurationsavg * 2) < lowduration)
       {
         decode();
@@ -110,7 +122,11 @@ void loop()
     {
       startttimelow = millis();
       highduration = (millis() - starttimehigh);
-      calcavg();
+
+      if (highduration < (2 * highdurationsavg))
+      {
+        highdurationsavg = (highduration + highdurationsavg + highdurationsavg) / 3;
+      }
 
       digitalWrite(ledPin, LOW);
 
@@ -128,6 +144,10 @@ void loop()
   if ((highduration * 6) < (millis() - startttimelow))
   {
     decode();
+    if ((highduration * 12) < (millis() - startttimelow))
+    {
+      highdurationsavg = 60;
+    }
   }
 
   realstatebefore = realstate;
